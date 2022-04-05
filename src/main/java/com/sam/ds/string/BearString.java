@@ -47,7 +47,7 @@ public class BearString {
     String gene = bufferedReader.readLine();
 
     int result = Result.steadyGene(gene);
-    System.out.println(result);
+    System.out.println("op" + result);
     bufferedReader.close();
   }
 }
