@@ -18,9 +18,9 @@ public class LinkedList<T> {
       }
       temp.next = newNode;
       //TODO : add cycle on 5
-      if((Integer)data == 6){
+     /* if((Integer)data == 6){
         newNode.next=header;
-      }
+      }*/
     }
   }
 
@@ -30,7 +30,17 @@ public class LinkedList<T> {
       System.out.print(temp.data + " ");
       temp = temp.next;
     }
+  }
 
+  public void reverse(){
+    ListNode temp = header.next;
+    header.next = null;
+    while(temp != null){
+      ListNode tempNext = temp.next;
+      temp.next = header;
+      header = temp;
+      temp = tempNext;
+    }
   }
 
   public boolean findCycle() {

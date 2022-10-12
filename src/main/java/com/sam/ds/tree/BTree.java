@@ -14,6 +14,7 @@ public class BTree {
     }
   }
 
+
   private Node root;
 
   public void add(Integer data) {
@@ -26,34 +27,53 @@ public class BTree {
   }
 
   private void addHelper(Node node, Node newNode) {
-    if(node.data >= newNode.data) {
-      if(node.left == null) {
+    if (node.data >= newNode.data) {
+      if (node.left == null) {
         node.left = newNode;
-      }else {
+      } else {
         addHelper(node.left, newNode);
       }
-    }else {
-      if(node.right == null) {
+    } else {
+      if (node.right == null) {
         node.right = newNode;
-      }else {
+      } else {
         addHelper(node.right, newNode);
       }
     }
-       
-    }
+
+  }
 
   public void traverse() {
     inorder(root);
+    System.out.println();
+    preOrder(root);
+    System.out.println();
+    postOrder(root);
   }
 
-  private void inorder(Node root) { 
-    if(root != null) {
-      System.out.println(root.data);
+  private void inorder(Node root) {
+    if (root != null) {
       inorder(root.left);
+      System.out.print(root.data + " ");
       inorder(root.right);
     }
   }
 
+  private void preOrder(Node root) {
+    if (root == null)
+      return;
+    System.out.print(root.data + " ");
+    preOrder(root.left);
+    preOrder(root.right);
+  }
+
+  private void postOrder(Node root) {
+    if (root == null)
+      return;
+    postOrder(root.left);
+    postOrder(root.right);
+    System.out.print(root.data + " ");
+  }
 }
 
 
