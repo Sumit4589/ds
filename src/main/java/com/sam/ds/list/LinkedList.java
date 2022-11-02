@@ -44,20 +44,40 @@ public class LinkedList<T> {
   }
 
   public boolean findCycle() {
-    if(header == null || header.next == null){
+    if (isEmpty(header) || isEmpty(header.next)) {
       return false;
     }
     ListNode p1 = header;
     ListNode p2 = header.next.next;
-    while (p2 != null){
-      if(p1.data == p2.data){
-        return  true;
-      } else if(p2.next == null){
+    while (p2 != null) {
+      if (p1.data == p2.data) {
+        return true;
+      } else if (isEmpty(p2.next)) {
         return false;
       }
       p1 = p1.next;
       p2 = p2.next.next;
     }
     return false;
+  }
+
+  public void delete(T x) {
+    if (isEmpty(header))
+      return;
+    if (header.data == x) {
+      header = header.next;
+      return;
+    }
+    ListNode temp = header;
+    while (temp != null) {
+      if (temp.next != null && temp.next.data == x) {
+        temp.next = temp.next.next;
+      }
+      temp = temp.next;
+    }
+  }
+
+  private boolean isEmpty(ListNode<T> header) {
+    return header == null;
   }
 }
