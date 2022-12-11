@@ -1,11 +1,13 @@
 package com.sam.ds.dp;
 
+import java.util.Arrays;
+
 public class SubsetSum {
 
   public static void main(String[] args) {
     // TODO Auto-generated method stub
     int arr[] = {2, 3, 7, 8, 10};
-    int sum = 100;
+    int sum = 0;
     System.out.println(isSubSetSum(arr, sum, 5));
   }
 

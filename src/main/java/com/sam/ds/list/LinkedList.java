@@ -5,10 +5,10 @@ public class LinkedList<T> {
 
   public void add(T data) {
     ListNode<T> newNode = new ListNode<>(data);
-    if (header == null) {
+    if (isEmpty(header)) {
       header = newNode;
     } else {
-      if(findCycle()){
+      if (findCycle()) {
         System.out.println("Cycle found before " + data);
         return;
       }
@@ -32,10 +32,10 @@ public class LinkedList<T> {
     }
   }
 
-  public void reverse(){
+  public void reverse() {
     ListNode temp = header.next;
     header.next = null;
-    while(temp != null){
+    while (temp != null) {
       ListNode tempNext = temp.next;
       temp.next = header;
       header = temp;

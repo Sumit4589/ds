@@ -11,7 +11,7 @@ interface TimeProvider {
 
 public class CachingDataStructure {
 
-    public class Node implements Comparable<Node> {
+    public class Node {
         public Node(String key, String value, long timeStamp) {
             this.key = key;
             this.value = value;
@@ -27,8 +27,8 @@ public class CachingDataStructure {
         }
 
         @Override
-        public int compareTo(Node o) {
-            return this.timeStamp.compareTo(o.getTimeStamp());
+        public String toString() {
+            return key + " " + value + " " + timeStamp;
         }
     }
 
@@ -37,13 +37,15 @@ public class CachingDataStructure {
 
     public Map<String, Node> map;
 
-
+    Queue<Node> queue;
 
 
     public CachingDataStructure(TimeProvider timeProvider, int maxSize) {
         this.timeProvider = timeProvider;
         this.maxSize = maxSize;
         map = new HashMap<>();
+        Comparator<Node> timestampComparator = Comparator.comparing(Node::getTimeStamp);
+        queue = new PriorityQueue<>(timestampComparator);
     }
 
     public void put(String key, String value, long timeToLeaveInMilliseconds) {
@@ -53,9 +55,10 @@ public class CachingDataStructure {
         cleanup();
         Node node = new Node(key, value, timeProvider.getMillis() + timeToLeaveInMilliseconds);
         if (map.size() >= maxSize) {
-            String nodeCloseToExpiry = map.entrySet().stream().findFirst().get().getKey();
-            map.remove(nodeCloseToExpiry);
+            Node nodeCloseToExpiry = queue.poll();
+            map.remove(nodeCloseToExpiry.key);
         }
+        queue.add(node);
         map.put(key, node);
     }
 
@@ -83,6 +86,7 @@ public class CachingDataStructure {
 
     private void removeNode(Node node) {
         map.remove(node.key);
+        queue.remove(node);
     }
 
 }
