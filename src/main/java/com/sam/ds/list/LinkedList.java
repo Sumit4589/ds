@@ -1,7 +1,7 @@
 package com.sam.ds.list;
 
 public class LinkedList<T> {
-  private ListNode<T> header;
+  public ListNode<T> header;
 
   public void add(T data) {
     ListNode<T> newNode = new ListNode<>(data);

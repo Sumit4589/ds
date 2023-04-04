@@ -1,9 +1,9 @@
-package com.sam.ds.game;
+package com.sam.interview.thoughtworks;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Test {
+public class EqualSum {
 
   public static void main(String[] args) {
     // TODO Auto-generated method stub
@@ -17,7 +17,7 @@ public class Test {
     List<Integer> rightarr = new LinkedList<>();
 
 
-    arr = arr3;
+    //arr = arr3;
 
     int j = arr.length - 1;
 
